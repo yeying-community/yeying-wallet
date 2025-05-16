@@ -4,28 +4,19 @@ import {IdentityManager,
   IndexedCache,
   }
 from '@yeying-community/yeying-next'
-import {ServiceCodeEnum,
-  ProviderCodeEnum,
-  SessionProvider,
-  LlmProvider,
-  NamespaceProvider,
-  Uploader,
-  ProviderProvider,
-  UserProvider,
-  LinkProvider,
-} from '@yeying-community/yeying-client-ts'
+import {ServiceCodeEnum} from '@yeying-community/yeying-client-ts'
 import {IdentityCodeEnum,NetworkTypeEnum} from '@yeying-community/yeying-web3'
 // import {IdentityCodeEnum, NetworkTypeEnum} from '@yeying-community/yeying-web3'
 import {setLocalStorage, getLocalStorage} from '@/utils/common'
 import type {MainConfig} from './types'
-let namespaceProvider: NamespaceProvider;
-let llmManager: LlmProvider;
-let sessionManager: SessionProvider;
-let uploader: Uploader;
-let providerProvider: ProviderProvider;
-let userProvider: UserProvider;
-let linkProvider: LinkProvider;
-let indexedCache: IndexedCache;
+// let namespaceProvider: NamespaceProvider;
+// let llmManager: LlmProvider;
+// let sessionManager: SessionProvider;
+// let uploader: Uploader;
+// let providerProvider: ProviderProvider;
+// let userProvider: UserProvider;
+// let linkProvider: LinkProvider;
+// let indexedCache: IndexedCache;
 let configInfo:MainConfig = {}
 
 // async function open(){
@@ -125,9 +116,9 @@ class $account {
     const securityAlgorithm = account.securityConfig.algorithm;
     const proxyObj = await this.getProxy(blockAddress)
     // 存储到 localStorage
-    setLocalStorage('proxy', proxyObj);
-    setLocalStorage('blockAddress', blockAddress);
-    setLocalStorage('securityAlgorithm', securityAlgorithm);
+    // setLocalStorage('proxy', proxyObj);
+    // setLocalStorage('blockAddress', blockAddress);
+    // setLocalStorage('securityAlgorithm', securityAlgorithm);
     if(configInfo.onLoginSuccess){
       configInfo.onLoginSuccess(account)
     }
