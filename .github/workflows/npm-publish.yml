@@ -1,35 +1,23 @@
-name: Published NPM Package 
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
 
 on:
   release:
-    types: [published]
+    types: [created]
 
 jobs:
-  build_and_publish:
+  publish-npm:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Clean up previous npm cache
-        run: |
-          npm cache clean --force
-          rm -f $HOME/.npmrc || true
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3  # 选择Node.js环境
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '22'  # 配置Node.js版本
-          registry-url: 'https://registry-npmjs.org'
-
-      - name: npm install
-        run: npm install 
-
-      - name: Build project
-        run: npm run build
-
-      - name: Publish Package
-        run: npm publish --access public
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+      - run: npm install
+      - run: npm run build
+      - run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
