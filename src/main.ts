@@ -7,6 +7,13 @@ import App from './App.vue';
 import {t} from '@yeying-community/yeying-i18n'
 import $account, {setConfig} from "./plugins/account";
 import { Buffer } from 'buffer';
+
+declare global {
+  interface Window {
+    Buffer: typeof Buffer;
+  }
+}
+
 window.Buffer = Buffer; // 全局注入
 const createAuthApp = (options: any = {}) => {
   const app = createApp(App);
