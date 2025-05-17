@@ -88,11 +88,16 @@
             ElMessage({message: proxy!.$t('common.check_file'), type: 'warning' });
               return
           }
-          const info = await $account.importIdentity(content, password)
-          did = info && info.metadata && info.metadata.did
-          if(!did){
-            ElMessage({message: proxy!.$t('common.check_file'), type: 'warning' });
-              return
+          try{
+            const info = await $account.importIdentity(content, password)
+            did = info && info.metadata && info.metadata.did
+            if(!did){
+              ElMessage({message: proxy!.$t('common.check_file'), type: 'warning' });
+                return
+            }
+          }catch(e){
+            ElMessage({message: proxy!.$t("common.check_login"), type: 'warning' });
+            return
           }
         }else{
           did = $account.getActiveDid()
