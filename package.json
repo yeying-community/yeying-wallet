@@ -1,5 +1,5 @@
 {
-  "name": "yeying-wallet",
+  "name": "@yeying-community/yeying-wallet",
   "version": "0.0.0",
   "main": "./dist/yeying-wallet.umd.js",
   "module": "./dist/yeying-wallet.es.js",
