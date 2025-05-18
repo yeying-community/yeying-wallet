@@ -1,23 +1,32 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
-
-name: Node.js Package
+name: Published NPM Package 
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
-  publish-npm:
-    runs-on: ubuntu-latest
+  build_and_publish:
+    runs-on: ubuntu-24.04
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3  # 选择Node.js环境
         with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org/
-      - run: npm install
-      - run: npm run build
-      - run: npm publish --access public
+          node-version: '22'  # 配置Node.js版本
+          registry-url: 'https://registry-npmjs.org'
+
+      - name: npm install
+        run: npm install 
+      - run: npm install -D rollup
+      - run: npm install -D tslib
+      
+      - name: Build project
+        run: npm run build
+
+      - name: Publish Package
+        run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
