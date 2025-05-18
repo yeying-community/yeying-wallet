@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3  # 选择Node.js环境
         with:
           node-version: '22'  # 配置Node.js版本
-          registry-url: 'https://registry-npmjs.org'
+          registry-url: 'https://registry-npmjs.org/'
 
       - name: Clean npm cache
         run: npm cache clean --force 
