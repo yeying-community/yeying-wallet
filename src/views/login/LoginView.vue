@@ -1,5 +1,5 @@
 <template>
-  <el-row class="content" :gutter="20">
+  <el-row class="contents" :gutter="20">
     <el-col class="left" :xs="0" :span="12">
       <div  @click="changeRouter('/')">
         <img class="title-img" src="../../assets/img/logo.svg"/>
@@ -141,7 +141,7 @@
     })
 </script>
 <style scoped lang="less">
-.content{
+.contents{
   height: 100vh;
   margin-left: 0;
   margin-right: 0;
