@@ -6,7 +6,7 @@ on:
 
 jobs:
   build_and_publish:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -18,10 +18,14 @@ jobs:
           node-version: '22'  # 配置Node.js版本
           registry-url: 'https://registry-npmjs.org'
 
-      - name: npm install
+      - name: Clean npm cache
+        run: npm cache clean --force 
+
+      - name: Install dependencies
         run: npm install 
-      - run: npm install -D rollup
-      - run: npm install -D tslib
+
+      - name: Install rollup and tslib
+        run: npm install -D rollup tslib
       
       - name: Build project
         run: npm run build
