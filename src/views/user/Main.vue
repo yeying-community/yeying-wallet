@@ -37,7 +37,7 @@ const sidebarOpen = ref(false)
 
 const navigation = [
   { title: "Account", to: '/profile/', name: 'user' },
-  { title: "Message", to: '/profile/message', name: 'message', icon:"icon-bell-full" },
+  // { title: "Message", to: '/profile/message', name: 'message', icon:"icon-bell-full" },
 
 ]
 

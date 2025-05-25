@@ -108,7 +108,7 @@
         }
         try{
             // router.push("/")
-            const info = await $account.login(did, password)
+            const info = await $account.login(did||'', password)
             console.log("登录:", info,form.value)
             router.push("/")
         }catch(e){

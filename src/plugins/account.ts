@@ -55,7 +55,7 @@ class $account {
    * @returns 
    */
   public async getServicesByCode(code: string | ServiceCodeEnum){
-    const did = this.getActiveDid()
+    const did = this.getActiveDid()||''
     const address = await this.getBlockAddress(did)
     const serviceManager = new ServiceManager(address);
     // 智能体供应商
@@ -93,7 +93,7 @@ class $account {
       name: pamras.name,
       avatar: pamras.avatar,
       code: pamras.code,}
-    const newIdentity = await this.manager.createIdentity(password, template);
+    const newIdentity = await this.manager.createIdentity(password, template as IdentityTemplate);
     return newIdentity
   }
   // 修改用户信息

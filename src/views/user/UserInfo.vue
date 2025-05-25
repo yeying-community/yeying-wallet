@@ -118,7 +118,7 @@
   }
   const instance = getCurrentInstance();
   const proxy = instance && instance.proxy;
-  const form = ref<RuleForm>({
+  const form = ref<RuleForm | any>({
     name: "",
     password: "",
     avatar: "",
@@ -159,7 +159,7 @@
   }
   
   const editUser = () => {
-    formRef.value.validate((valid) => {
+    formRef.value.validate((valid:boolean) => {
       if (valid) {
         isEdit.value = false
         const {password,name,avatar} = form.value
