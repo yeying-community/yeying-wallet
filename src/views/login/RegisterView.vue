@@ -1,10 +1,10 @@
 <template>
   <el-row class="content" :gutter="20">
     <el-col class="left" :xs="0" :span="12">
-      <div @click="changeRouter('/')">
+      <!-- <div @click="changeRouter('/')">
         <img class="title-img" src="../../assets/img/logo.svg" />
       </div>
-      <div>phone left==</div>
+      <div>phone left==</div> -->
     </el-col>
     <el-col class="right" :xs="24" :span="12">
       <div class="title">{{ $t("common.apply_reg") }}</div>

@@ -5,7 +5,7 @@ import {IdentityManager,
   }
 from '@yeying-community/yeying-next'
 import {ServiceCodeEnum} from '@yeying-community/yeying-client-ts'
-import {IdentityCodeEnum,NetworkTypeEnum} from '@yeying-community/yeying-web3'
+import {IdentityCodeEnum,NetworkTypeEnum,IdentityTemplate} from '@yeying-community/yeying-web3'
 import {setLocalStorage, getLocalStorage} from '@/utils/common'
 import type {MainConfig} from './types'
 let configInfo:MainConfig = {}
@@ -20,7 +20,7 @@ export const setConfig = (config:any) => {
 class $account {
   public codeList: SelectOptions[];
   public networkList: SelectOptions[];
-  public manager: any;
+  public manager: IdentityManager;
   constructor() {
     this.manager = new IdentityManager()
     this.codeList = [
@@ -96,6 +96,15 @@ class $account {
     const newIdentity = await this.manager.createIdentity(password, template);
     return newIdentity
   }
+  // 修改用户信息
+  public async updateIdentity(template: Partial<IdentityTemplate>, password?: string){
+    const info = await this.getActiveIdentity()
+    if(info){
+      const did = this.getActiveDid() || ''
+      return this.manager.updateIdentity(did, template, password||'')
+    }
+    console.log("userinfo--->", info)
+  }
   // 登录导入身份信息。
   public async importIdentity(code:string, pwd:string){
     const Identity = await this.manager.importIdentity(code, pwd)
@@ -132,6 +141,10 @@ class $account {
       }
     }
     return false
+  }
+  public async logout(){
+    const account = await this.manager.logout()
+    return account
   }
   // 创建游客身份
   // async createGuest() {
