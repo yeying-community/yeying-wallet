@@ -6,6 +6,15 @@
       </div>
     </div> -->
     <!-- <p>例子</p> -->
+    <div class="test-button">
+      <!-- <button @click="changeImg" class="btn">changeImg</button> -->
+      <el-avatar :size="80" :src="previews" />
+      <div>
+        <label class="btn" for="uploads">上传头像</label>
+        <input type="file" id="uploads" style="position:absolute; clip:rect(0 0 0 0);" accept="image/png, image/jpeg, image/gif, image/jpg"
+          @change="uploadImg($event, 1)">
+      </div>
+    </div>
     <div class="cut">
       <vue-cropper ref="cropper" :img="option.img" :output-size="option.size" :output-type="option.outputType" :info="true" :full="option.full" :fixed="fixed" :fixed-number="fixedNumber"
         :can-move="option.canMove" :can-move-box="option.canMoveBox" :fixed-box="option.fixedBox" :original="option.original"
@@ -13,19 +22,12 @@
 				@real-time="realTime" :high="option.high"
           @img-load="imgLoad" mode="contain" :max-img-size="option.max" @crop-moving="cropMoving"></vue-cropper>
     </div>
-     <div class="show-preview" :style="{'width': previews.w + 'px', 'height': previews.h + 'px',  'overflow': 'hidden', 'margin': '5px',zoom:0.5}">
+     <!-- <div class="show-preview" :style="{'width': previews.w + 'px', 'height': previews.h + 'px',  'overflow': 'hidden', 'margin': '5px',zoom:0.5}">
       <div :style="previews.div">
         <img :src="previews.url" :style="previews.img">
       </div>
-    </div>
-    <div class="test-button">
-      <!-- <button @click="changeImg" class="btn">changeImg</button> -->
-      <label class="btn" for="uploads">上传头像</label>
-      <input type="file" id="uploads" style="position:absolute; clip:rect(0 0 0 0);" accept="image/png, image/jpeg, image/gif, image/jpg"
-        @change="uploadImg($event, 1)">
-      <!-- <button @click="finish('blob')" class="btn">preview(blob)</button>
-      <button @click="finish()" class="btn">preview</button> -->
-    </div>
+    </div> -->
+    
     <!-- <div class="test-button">
       <button @click="changeImg" class="btn">changeImg</button>
       <label class="btn" for="uploads">upload</label>
@@ -110,7 +112,7 @@ const props = defineProps(["curImg"])
 const model = ref(false)
 const modelSrc = ref('')
 const crap = ref(false)
-const previews = ref({})
+const previews = ref()
 const cropper = ref()
 const lists = ref([
       {
@@ -130,7 +132,7 @@ const option = ref({
   // 只有自动截图开启 宽度高度才生效
   autoCropWidth: 200,
   autoCropHeight: 200,
-  centerBox: false,
+  centerBox: true,
   high: true,
   max: 99999,
 })
@@ -175,7 +177,7 @@ const finish = (type) => {
   return new Promise((resolve, reject) => {
     try{
       cropper.value.getCropData((data) => {
-        model.value = true;
+        // model.value = true;
         resolve(data)
         // console.log('outimg base64-->',data)
         // modelSrc.value = data;
@@ -186,9 +188,11 @@ const finish = (type) => {
   })
 }
 // 实时预览函数
-const realTime = (data) => {
-  previews.value = {
-    ...data,
+const realTime = async (data) => {
+  const img = await finish()
+  previews.value = img
+  // previews.value = {
+  //   ...data,
     // div: {
     //   ...data.div,
     //   width: '100px',
@@ -201,7 +205,7 @@ const realTime = (data) => {
     //   'transform-origin': '0 0', // 确保缩放从左上角计算
     //   'object-fit': 'contain', // 保持比例，填充但不拉伸
     // },
-  };
+  // };
   console.log(data);
 }
 const down = (type) => {
@@ -287,8 +291,8 @@ defineExpose({ finish });
 
 .test-button {
   display: flex;
-  flex-wrap: wrap;
-  align-content: center;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .btn {

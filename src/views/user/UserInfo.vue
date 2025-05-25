@@ -32,7 +32,7 @@
           </el-form-item>
   
           <!-- 显示名称 -->
-          <el-form-item label="Display Name">
+          <el-form-item label="Display Name"  prop="name">
             <el-input
               v-if="isEdit"
               v-model="form.name"
@@ -66,7 +66,7 @@
           </el-form-item> -->
   
           <!-- 密码 -->
-          <el-form-item label="Password">
+          <el-form-item label="Password" prop="password">
             <el-input
               v-if="isEdit"
               v-model="form.password"
@@ -75,7 +75,7 @@
               type="password"
               show-password
             />
-            <span v-else>{{ form.password }}</span>
+            <span v-else>******</span>
           </el-form-item>
   
           <!-- 操作按钮 -->
@@ -105,6 +105,7 @@
   import $account from '@/plugins/account'
   import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
   import { useRouter } from 'vue-router'
+  import { ElMessage } from "element-plus";
 
   const open = ref(false)
   const RefContact = ref()
@@ -144,7 +145,8 @@
   const getUserInfo = async () => {
     const info = await $account.getActiveIdentity()
     console.log(111,info)
-    form.value = info&&info.metadata||{}
+    const data = info&&info.metadata||{}
+    form.value = JSON.parse(JSON.stringify(data))
   }
   const toEdit = () => {
     isEdit.value = true
@@ -159,11 +161,16 @@
   }
   
   const editUser = () => {
-    formRef.value.validate((valid:boolean) => {
+    formRef.value.validate(async (valid:boolean) => {
       if (valid) {
-        isEdit.value = false
         const {password,name,avatar} = form.value
-        $account.updateIdentity({name,avatar},password)
+        try{
+          await $account.updateIdentity({name,avatar},password)
+          isEdit.value = false
+        }catch(e){
+          // console.error(1111,e)
+          ElMessage({ message: "密码校验失败", type: "warning" });
+        }
         // 这里可以添加提交表单的逻辑
       }
     })
