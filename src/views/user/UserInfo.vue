@@ -165,6 +165,12 @@
       if (valid) {
         const {password,name,avatar} = form.value
         try{
+          const hasLogin = $account.checkLogin()
+          if(!hasLogin){
+            ElMessage({ message: "请先登录", type: "warning" });
+            router.push("/toLogin")
+            return
+          }
           await $account.updateIdentity({name,avatar},password)
           isEdit.value = false
         }catch(e){
