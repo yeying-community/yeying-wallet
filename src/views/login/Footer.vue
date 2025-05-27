@@ -36,7 +36,9 @@
           rel="noreferrer"
           target="_blank"
           class="record-link"
-        >浙公网安备33010902004112号</a>
+        >
+        <span style="margin-right: 10px;">浙公网安备33010902004112号</span>
+        <span>浙ICP备2024126729号-2</span></a>
         <span class="copyright">Copyright © 2024</span>
       </div>
     </div>
