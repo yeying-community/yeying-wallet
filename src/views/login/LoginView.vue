@@ -1,56 +1,59 @@
 <template>
-  <el-row class="content" :gutter="20">
-    <el-col class="left" :xs="0" :span="12">
-      <div  @click="changeRouter('/')">
-        <img class="title-img" src="../../assets/img/logo.svg"/>
-      </div>
-      <div>
-        phone left
-      </div>
-    </el-col>
-    <el-col class="right" :xs="24" :span="12">
-      <div class="title">
-        {{$t('common.reg_yeying')}}
-      </div>
-      <div class="sub-title">
-        {{$t('common.noacount')}}?  <span style="color:#1677FF;cursor:pointer" @click="changeRouter('/reg')">{{$t('common.apply_for')}}</span>
-      </div>
-      <div class="reg-form">
-        <el-form
-          ref="ruleFormRef"
-          style="width:400px"
-          :model="form"
-          :rules="rules"
-          label-width="auto"
-          class="demo-ruleForm"
-          status-icon
-        >
-          <el-form-item  v-if="!hasAccount"  :label="$t('common.identy_file')" prop="password">
-            <Uploader @change="changeFile">
-              <el-button type="primary">{{$t('common.upload_btn')}}</el-button>
-            </Uploader>
-          </el-form-item>
-          <el-form-item  :label="$t('common.password')" prop="password">
-            <el-input
-              :placeholder="$t('common.pleaseInput')"
-              v-model="form.password"
-              type="password"
-              autocomplete="off" />
-          </el-form-item>
+  <div class="main-content">
+    <el-row class="contents" :gutter="20">
+      <el-col class="left" :xs="0" :span="12">
+        <!-- <div  @click="changeRouter('/')">
+          <img class="title-img" src="../../assets/img/logo.svg"/>
+        </div>
+        <div>
+          phone left
+        </div> -->
+      </el-col>
+      <el-col class="right" :xs="24" :span="12">
+        <div class="title">
+          {{$t('common.reg_yeying')}}
+        </div>
+        <div class="sub-title">
+          {{$t('common.noacount')}}?  <span style="color:#1677FF;cursor:pointer" @click="changeRouter('/reg')">{{$t('common.apply_for')}}</span>
+        </div>
+        <div class="reg-form">
+          <el-form
+            ref="ruleFormRef"
+            style="width:400px"
+            :model="form"
+            :rules="rules"
+            label-width="auto"
+            class="demo-ruleForm"
+            status-icon
+          >
+            <el-form-item  v-if="!hasAccount"  :label="$t('common.identy_file')" prop="password">
+              <Uploader @change="changeFile">
+                <el-button type="primary">{{$t('common.upload_btn')}}</el-button>
+              </Uploader>
+            </el-form-item>
+            <el-form-item  :label="$t('common.password')" prop="password">
+              <el-input
+                :placeholder="$t('common.pleaseInput')"
+                v-model="form.password"
+                type="password"
+                autocomplete="off" />
+            </el-form-item>
 
-          <el-form-item>
-            <el-checkbox style="margin-right:5px" v-model="form.isAgree" size="large" />
-            {{ $t('common.agree') }} {{ $t('common.deal') }} & {{ $t('common.policy') }}
-          </el-form-item>
-          <el-form-item>
-            <el-button style="width:100%;" type="primary" @click="handleSubmit">
-              {{ $t('common.login') }}
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </el-col>
-  </el-row>
+            <el-form-item>
+              <el-checkbox style="margin-right:5px" v-model="form.isAgree" size="large" />
+              {{ $t('common.agree') }} {{ $t('common.deal') }} & {{ $t('common.policy') }}
+            </el-form-item>
+            <el-form-item>
+              <el-button style="width:100%;" type="primary" @click="handleSubmit">
+                {{ $t('common.login') }}
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-col>
+    </el-row>
+    <Footer />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -60,7 +63,7 @@
     import Uploader from '@/components/common/Uploader.vue'
     import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
     import { ElMessage } from 'element-plus'
-
+    import Footer from './Footer.vue'
     interface RuleForm {
       password: string
     }
@@ -108,7 +111,7 @@
         }
         try{
             // router.push("/")
-            const info = await $account.login(did, password)
+            const info = await $account.login(did||'', password)
             console.log("登录:", info,form.value)
             router.push("/")
         }catch(e){
@@ -141,10 +144,14 @@
     })
 </script>
 <style scoped lang="less">
-.content{
+.main-content{
   height: 100vh;
   margin-left: 0;
   margin-right: 0;
+
+}
+.contents{
+  height: 100%;
   .left {
     padding: 3rem !important;
     background: linear-gradient(111deg, #C268DF 1%, #6C8AED 44.4%, #8CCFFA 98.52%);

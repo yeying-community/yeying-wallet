@@ -35,7 +35,24 @@ export const sdkRoutes = [
     component: Reg,
     // component: () => import('../views/login/RegisterView.vue'),
     meta: { public: true },
-  }
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/user/ProfileView.vue'),
+    children:[
+      {
+        path: '',
+        name: 'user',
+        component: () => import('../views/user/UserView.vue'),
+      },
+      {
+        path: 'message',
+        name: 'message',
+        component: () => import('../views/user/MessageView.vue'),
+      },
+    ]
+  },
 ]
 /**
  * 登录路由守卫:

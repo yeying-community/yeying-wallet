@@ -1,4 +1,5 @@
 <template>
+  <div class="main-content">
   <div class="content bg">
     <div class="win">
         <!-- <DialogTitle as="h3" class="text-base font-semibold text-gray-900">登录</DialogTitle> -->
@@ -21,25 +22,35 @@
           <!-- <button type="button" class="inline-flex w-20 justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline-indigo-600 hover:bg-indigo-400" @click="login">登录</button>
           <button type="button" class="inline-flex w-20 justify-center rounded-md  px-3 py-2 text-sm font-semibold shadow-sm hover:bg-gray-50" @click="login">取消</button> -->
         </div>
-      </div>
+    </div>
   </div>
+  <Footer/>
+</div>
 </template>
 
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus'
+import Footer from './Footer.vue'
+
 const router = useRouter();
 const instance = getCurrentInstance()
 const { proxy } = getCurrentInstance()!;
 const { $t } = proxy || {}
 const sidebarOpen = ref(false)
-import { ElMessage } from 'element-plus'
 
 const go = (url:string) => {
   router.push(url)
 }
 </script>
 <style scoped lang="less">
+.main-content{
+  height: 100vh;
+  margin-left: 0;
+  margin-right: 0;
+
+}
 .bg{
   width: 100vw;
   height: 100vh;
