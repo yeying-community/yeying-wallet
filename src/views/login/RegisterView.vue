@@ -1,90 +1,94 @@
 <template>
-  <el-row class="content" :gutter="20">
-    <el-col class="left" :xs="0" :span="12">
-      <!-- <div @click="changeRouter('/')">
-        <img class="title-img" src="../../assets/img/logo.svg" />
-      </div>
-      <div>phone left==</div> -->
-    </el-col>
-    <el-col class="right" :xs="24" :span="12">
-      <div class="title">{{ $t("common.apply_reg") }}</div>
-      <div class="sub-title">
-        {{ $t("common.member") }}?
-        <span style="color: #1677ff; cursor: pointer" @click="changeRouter('/login')">{{
-          $t("common.register")
-        }}</span>
-      </div>
-      <div class="reg-form">
-        <el-form
-          ref="ruleFormRef"
-          style="width: 500px"
-          :model="form"
-          :rules="rules"
-          label-width="auto"
-          class="demo-ruleForm"
-          :size="formSize"
-          status-icon
-        >
-          <el-form-item v-if="isContinue" :label="$t('common.disiplay_name')" prop="name">
-            <el-input :placeholder="$t('common.pleaseInput')" v-model="form.name" />
-          </el-form-item>
-          <el-form-item v-if="isContinue" label="Avatar">
-            <UserAvatar ref="userAdvatarRef" />
-          </el-form-item>
-          <el-form-item v-if="isContinue" label="Account Type" prop="code">
-            <el-select-v2
-              v-model="form.code"
-              :placeholder="$t('common.pleaseInput')"
-              :options="$account.codeList"
-            />
-          </el-form-item>
-          <el-form-item v-if="isContinue" :label="$t('common.password')" prop="password">
-            <el-input
-              :placeholder="$t('common.pleaseInput')"
-              v-model="form.password"
-              type="password"
-              autocomplete="off"
-            />
-          </el-form-item>
-          <el-form-item
-            v-if="isContinue"
-            :label="$t('common.cofirm_pwd')"
-            prop="confirm_pwd"
-          >
-            <el-input
-              :placeholder="$t('common.pleaseInput')"
-              v-model="form.confirm_pwd"
-              type="password"
-              autocomplete="off"
-            />
-          </el-form-item>
+  <div class="main-content">
 
-          <el-form-item v-if="!isContinue" :label="$t('common.network')" prop="network">
-            <el-select-v2
-              :placeholder="$t('common.pleaseInput')"
-              v-model="form.network"
-              :options="$account.networkList"
-            />
-          </el-form-item>
-          <el-form-item v-if="!isContinue">
-            <!-- <label> -->
-            <el-checkbox style="margin-right: 5px" v-model="form.isAgree" size="large" />
-            {{ $t("common.agree") }} {{ $t("common.deal") }} & {{ $t("common.policy") }}
-            <!-- </label> -->
-          </el-form-item>
-          <el-form-item>
-            <el-button
-              style="width: 100%"
-              type="primary"
-              @click="handleSubmit(ruleFormRef)"
+    <el-row class="content" :gutter="20">
+      <el-col class="left" :xs="0" :span="12">
+        <!-- <div @click="changeRouter('/')">
+          <img class="title-img" src="../../assets/img/logo.svg" />
+        </div>
+        <div>phone left==</div> -->
+      </el-col>
+      <el-col class="right" :xs="24" :span="12">
+        <div class="title">{{ $t("common.apply_reg") }}</div>
+        <div class="sub-title">
+          {{ $t("common.member") }}?
+          <span style="color: #1677ff; cursor: pointer" @click="changeRouter('/login')">{{
+            $t("common.register")
+          }}</span>
+        </div>
+        <div class="reg-form">
+          <el-form
+            ref="ruleFormRef"
+            style="width: 500px"
+            :model="form"
+            :rules="rules"
+            label-width="auto"
+            class="demo-ruleForm"
+            :size="formSize"
+            status-icon
+          >
+            <el-form-item v-if="isContinue" :label="$t('common.disiplay_name')" prop="name">
+              <el-input :placeholder="$t('common.pleaseInput')" v-model="form.name" />
+            </el-form-item>
+            <el-form-item v-if="isContinue" label="Avatar">
+              <UserAvatar ref="userAdvatarRef" />
+            </el-form-item>
+            <el-form-item v-if="isContinue" label="Account Type" prop="code">
+              <el-select-v2
+                v-model="form.code"
+                :placeholder="$t('common.pleaseInput')"
+                :options="$account.codeList"
+              />
+            </el-form-item>
+            <el-form-item v-if="isContinue" :label="$t('common.password')" prop="password">
+              <el-input
+                :placeholder="$t('common.pleaseInput')"
+                v-model="form.password"
+                type="password"
+                autocomplete="off"
+              />
+            </el-form-item>
+            <el-form-item
+              v-if="isContinue"
+              :label="$t('common.cofirm_pwd')"
+              prop="confirm_pwd"
             >
-              {{ isContinue ? $t("common.continue") : $t("common.completed") }}
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </el-col>
-  </el-row>
+              <el-input
+                :placeholder="$t('common.pleaseInput')"
+                v-model="form.confirm_pwd"
+                type="password"
+                autocomplete="off"
+              />
+            </el-form-item>
+
+            <el-form-item v-if="!isContinue" :label="$t('common.network')" prop="network">
+              <el-select-v2
+                :placeholder="$t('common.pleaseInput')"
+                v-model="form.network"
+                :options="$account.networkList"
+              />
+            </el-form-item>
+            <el-form-item v-if="!isContinue">
+              <!-- <label> -->
+              <el-checkbox style="margin-right: 5px" v-model="form.isAgree" size="large" />
+              {{ $t("common.agree") }} {{ $t("common.deal") }} & {{ $t("common.policy") }}
+              <!-- </label> -->
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                style="width: 100%"
+                type="primary"
+                @click="handleSubmit(ruleFormRef)"
+              >
+                {{ isContinue ? $t("common.continue") : $t("common.completed") }}
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-col>
+    </el-row>
+    <Footer />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -95,6 +99,7 @@ import UserAvatar from "./avatar/index.vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
 import { IdentityCodeEnum, NetworkTypeEnum } from "@yeying-community/yeying-web3";
+import Footer from './Footer.vue'
 
 const instance = getCurrentInstance();
 const proxy = instance && instance.proxy;
@@ -248,6 +253,12 @@ const changeRouter = (url: string) => {
 };
 </script>
 <style scoped lang="less">
+.main-content{
+  height: 100vh;
+  margin-left: 0;
+  margin-right: 0;
+
+}
 .content {
   height: 100vh;
   margin-left: 0;
