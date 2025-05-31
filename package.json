@@ -1,6 +1,6 @@
 {
   "name": "@yeying-community/yeying-wallet",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./dist/yeying-wallet.umd.js",
   "module": "./dist/yeying-wallet.es.js",
   "types": "./dist/index.d.ts",
