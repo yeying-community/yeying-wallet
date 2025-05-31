@@ -32,7 +32,7 @@
       <el-divider class="divider"/>
       <div class="footer-bottom">
         <a
-          href="https://beian.mps.gov.cn/#/query/webSearch?code=33010902004112"
+          href="https://beian.miit.gov.cn/"
           rel="noreferrer"
           target="_blank"
           class="record-link"
