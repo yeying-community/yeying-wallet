@@ -8,11 +8,17 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    visualizer({
+      open: false, // 打包完成后自动打开分析页面
+      gzipSize: true, // 显示gzip压缩后的大小
+      brotliSize: true // 显示brotli压缩后的大小
+    }),
     vueDevTools(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
@@ -40,13 +46,22 @@ export default defineConfig({
       fileName: (format) => `yeying-wallet.${format}.js`,
     },
     rollupOptions: {
-      external: ['vue', 'vue-router', 'pinia', 'element-plus'],
+      external: ['vue', 'vue-router', 'pinia', 'element-plus',
+        '@yeying-community/yeying-i18n',
+        '@yeying-community/yeying-client-ts',
+        '@yeying-community/yeying-next',
+        '@yeying-community/yeying-web3',
+      ],
       output: {
         globals: {
-          vue: 'Vue',
+          'vue': 'Vue',
           'vue-router': 'VueRouter',
-          pinia: 'Pinia',
+          'pinia': 'Pinia',
           'element-plus': 'ElementPlus',
+          '@yeying-community/yeying-client-ts': 'YeyingClientTS',
+          '@yeying-community/yeying-i18n': 'YeyingI18n',
+          '@yeying-community/yeying-next': 'YeyingNext',
+          '@yeying-community/yeying-web3': 'YeyingWeb3',
         },
       },
     },
