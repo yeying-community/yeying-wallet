@@ -27,7 +27,6 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { RouterView, useRouter, useRoute } from 'vue-router'
-import { ElDrawer, ElMenu, ElMenuItem } from 'element-plus'
 import { User } from '@element-plus/icons-vue'
 
 const router = useRouter()

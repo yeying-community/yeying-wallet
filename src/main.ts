@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 // import { createPinia } from 'pinia';
-import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
+// import ElementPlus from 'element-plus';
+// import 'element-plus/dist/index.css';
 import { sdkRoutes, sdkSetupRouter } from './router';
 import App from './App.vue';
 import {t} from '@yeying-community/yeying-i18n'
@@ -28,7 +28,7 @@ const createAuthApp = (options: any = {}) => {
   // app.use(router);
   // -----本地调试end------
   setConfig(options)
-  app.use(ElementPlus);
+  // app.use(ElementPlus);
   app.mount('#app')
 
   return app;
