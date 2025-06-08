@@ -63,5 +63,5 @@ export interface CacheTable {
 }
 export interface MainConfig{
   onLoginSuccess?: Function,
-  onRegisterSuccess?: Function,
+  onCreateSuccess?: Function,
 }

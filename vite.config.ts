@@ -39,7 +39,7 @@ export default defineConfig({
   build: {
     // cssCodeSplit: false, // 强制内联样式
     // minify: false, // 关闭压缩便于调试
-    // sourcemap: true,
+    sourcemap: false,
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       name: 'VueAuthSdk',

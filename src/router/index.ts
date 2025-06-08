@@ -60,13 +60,17 @@ export const sdkRoutes = [
  * 2. 非公开路由:未登录跳转到登录页面、登录后跳转到之前的页面
  * @param router
  */
-export const sdkSetupRouter = (router: Router) => {
-  router.beforeEach((to,from,next) => {
+export const sdkSetupRouter = (router: Router,intialized:Function) => {
+  router.beforeEach(async (to,from,next) => {
     // 如果是不是公开路由，并且没有登录，跳转到登录页面
     if (!to.meta.public && !$account.checkLogin()) {
       next('/toLogin');
       // return { name: 'authMiddleware', query: { redirect: to.fullPath } };
     }else{
+      // 页面跳转拦截
+      if(intialized){
+        await intialized()
+      }
       next()
     }
   });
