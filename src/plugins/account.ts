@@ -94,6 +94,9 @@ class $account {
       avatar: pamras.avatar,
       code: pamras.code,}
     const newIdentity = await this.manager.createIdentity(password, template as IdentityTemplate);
+    if(configInfo.onCreateSuccess){
+      configInfo.onCreateSuccess(newIdentity)
+    }
     return newIdentity
   }
   // 修改用户信息
