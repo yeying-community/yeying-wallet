@@ -1,13 +1,8 @@
-import {IdentityManager,
-  ServiceManager,
-
-  IndexedCache,
-  }
-from '@yeying-community/yeying-next'
+import {IdentityManager, ServiceManager,} from '@yeying-community/yeying-next'
 import {ServiceCodeEnum} from '@yeying-community/yeying-client-ts'
-import {IdentityCodeEnum,NetworkTypeEnum,IdentityTemplate} from '@yeying-community/yeying-web3'
-import {setLocalStorage, getLocalStorage} from '@/utils/common'
+import {IdentityCodeEnum, IdentityTemplate, NetworkTypeEnum} from '@yeying-community/yeying-web3'
 import type {MainConfig} from './types'
+
 let configInfo:MainConfig = {}
 
 interface SelectOptions {
@@ -38,54 +33,39 @@ class $account {
     // this.mail = new MailProvider()
     console.log("account:",this.manager)
   }
+
   // 获取指定 DID 对应的区块链地址。
   public async getBlockAddress(did: string) {
     return await this.manager.getBlockAddress(did)
   }
+
   // 导出身份信息。
   public async exportIdentity(did:string){
     const identity = await this.manager.exportIdentity(did);
     return identity
   }
+
   // 获取代理信息
   /**
-   * 
-   * @param code 代理服务类型，默认智能体
-   * eg:const agent = await $account.getServicesByCode(ServiceCodeEnum.SERVICE_CODE_AGENT)
-   * @returns 
+   * @param code 代理服务类型
+   *
    */
-  public async getServicesByCode(code: string | ServiceCodeEnum){
+  public async getServicesByCode(code: ServiceCodeEnum){
     const did = this.getActiveDid()||''
     const address = await this.getBlockAddress(did)
     const serviceManager = new ServiceManager(address);
-    // 智能体供应商
-    const services_agent = await serviceManager.listServiceByCode(ServiceCodeEnum.SERVICE_CODE_AGENT)
-    return  services_agent&&services_agent[0]&&services_agent[0].proxy
+    return await serviceManager.listServiceByCode(code)
   }
-  // 获取代理信息
-  // public async getProxy(address: any){
-  //   const serviceManager = new ServiceManager(address);
-  //   // 智能体供应商
-  //   const services_agent = await serviceManager.listServiceByCode(ServiceCodeEnum.SERVICE_CODE_AGENT)
-  //   // 仓储服务供应商
-  //   const services_warehouse = await serviceManager.listServiceByCode(ServiceCodeEnum.SERVICE_CODE_WAREHOUSE)
-  //   return {
-  //     agent: services_agent&&services_agent[0]&&services_agent[0].proxy,
-  //     warehouse: services_warehouse&&services_warehouse[0]&&services_warehouse[0].proxy
-  //   }
-  // }
+
   // 登录
   public async login(did: string,password: string){
     const account = await this.manager.login(did,password)
-    // 登录后获取动态参数
-    // const blockAddress = await this.manager.getBlockAddress(did);
-    // const securityAlgorithm = account.securityConfig.algorithm;
-    // const proxyObj = await this.getProxy(blockAddress)
     if(configInfo.onLoginSuccess){
       configInfo.onLoginSuccess(account)
     }
     return account
   }
+
   // 注册:创建一个新的身份，并在区块链上生成地址。
   public async createIdentity(password:string, pamras:any){
     const template = {
@@ -149,13 +129,5 @@ class $account {
     const account = await this.manager.logout()
     return account
   }
-  // 创建游客身份
-  // async createGuest() {
-  //   const info = await this.manager.createGuest()
-  //   // 登录
-  //   const did = info.metadata.did
-  //   // await this.manager.login(did)
-  //   return info
-  // }
 }
 export default new $account()
