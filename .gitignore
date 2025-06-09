@@ -3,3 +3,4 @@ node_modules
 dist
 # Generated files
 package-lock.json
+stats.html
