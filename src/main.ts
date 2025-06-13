@@ -9,13 +9,13 @@ import $account, {setConfig} from "./plugins/account";
 import { Buffer } from 'buffer';
 import { createRouter, createWebHistory, Router } from 'vue-router'
 
-declare global {
-  interface Window {
-    Buffer: typeof Buffer;
-  }
-}
+// declare global {
+//   interface Window {
+//     Buffer: typeof Buffer;
+//   }
+// }
 
-window.Buffer = Buffer; // 全局注入
+// window.Buffer = Buffer; // 全局注入
 const createWallet = (router: Router,intialized: Function, options:{onLoginSuccess?:Function,onCreateSuccess?:Function}) => {
   const app = createApp(App);
   app.config.globalProperties.$t = t || {}

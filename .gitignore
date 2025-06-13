@@ -5,3 +5,4 @@ dist
 package-lock.json
 stats.html
 .idea
+build.log
