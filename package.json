@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "build:trace": "VITE_PROFILE=1 run-p type-check \"build-only {@}\" --  --debug > build.log 2>&1",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
