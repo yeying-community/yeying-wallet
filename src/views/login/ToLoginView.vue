@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import { useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 import Footer from './Footer.vue'
 
 const router = useRouter();

@@ -6,8 +6,6 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
 import Header from './Header.vue'
 import Main from './Main.vue'
 

@@ -31,14 +31,24 @@
       </div>
       <el-divider class="divider"/>
       <div class="footer-bottom">
-        <a
-          href="https://beian.miit.gov.cn/"
-          rel="noreferrer"
-          target="_blank"
-          class="record-link"
-        >
-        <span style="margin-right: 10px;">浙公网安备33010902004112号</span>
-        <span>浙ICP备2024126729号-2</span></a>
+        <div>
+          <a
+            href="https://beian.mps.gov.cn/#/query/webSearch?code=33010902004112"
+            rel="noreferrer"
+            target="_blank"
+            class="record-link"
+          >
+            <span style="margin-right: 10px;">浙公网安备33010902004112号</span>
+          </a>
+          <a
+            href="https://beian.miit.gov.cn/"
+            rel="noreferrer"
+            target="_blank"
+            class="record-link"
+          >
+            <span>浙ICP备2024126729号-2</span>
+          </a>
+        </div>
         <span class="copyright">Copyright © 2024</span>
       </div>
     </div>

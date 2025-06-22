@@ -1,6 +1,6 @@
 {
   "name": "@yeying-community/yeying-wallet",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "main": "./dist/yeying-wallet.umd.js",
   "module": "./dist/yeying-wallet.es.js",
   "types": "./dist/index.d.ts",
@@ -16,20 +16,49 @@
     "lint": "eslint . --fix",
     "build:docs": "typedoc --skipErrorChecking"
   },
-  "dependencies": {
-    "@multiavatar/multiavatar": "^1.0.7",
+  "peerDependencies": {
     "@yeying-community/yeying-client-ts": "^1.0.12",
     "@yeying-community/yeying-i18n": "^0.0.3",
-    "@yeying-community/yeying-next": "^0.0.40",
     "@yeying-community/yeying-web3": "^0.0.36",
-    "buffer": "^6.0.3",
-    "cropperjs": "^2.0.0",
+    "@yeying-community/yeying-next": "^0.0.42",
     "element-plus": "^2.9.10",
     "pinia": "^3.0.1",
-    "vite-plugin-dts": "^4.5.3",
     "vue": "^3.5.14",
-    "vue-cropper": "^1.0.9",
     "vue-router": "^4.5.0"
+  },
+  "peerDependenciesMeta": {
+    "@yeying-community/yeying-client-ts": {
+      "optional": false
+    },
+    "@yeying-community/yeying-i18n": {
+      "optional": false
+    },
+    "@yeying-community/yeying-next": {
+      "optional": false
+    },
+    "@yeying-community/yeying-web3": {
+      "optional": false
+    },
+    "vue": {
+      "optional": false
+    },
+    "element-plus": {
+      "optional": false
+    },
+    "pinia": {
+      "optional": false
+    },
+    "vue-router": {
+      "optional": false
+    }
+  },
+  "dependencies": {
+    "@multiavatar/multiavatar": "^1.0.7",
+    
+    "buffer": "^6.0.3",
+    "cropperjs": "^2.0.0",
+    "vite-plugin-dts": "^4.5.3",
+    "vue-cropper": "^1.0.9"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.1",
@@ -44,6 +73,7 @@
     "less": "^4.3.0",
     "less-loader": "^10.2.0",
     "npm-run-all2": "^7.0.2",
+    "rollup-plugin-visualizer": "^6.0.1",
     "typedoc": "^0.28.4",
     "typescript": "~5.8.0",
     "unplugin-auto-import": "^19.2.0",
